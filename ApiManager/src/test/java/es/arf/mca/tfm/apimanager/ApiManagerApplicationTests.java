@@ -39,4 +39,13 @@ class ApiManagerApplicationTests {
 			assertThat().
 			statusCode(404);
 	}
+	
+	@Test
+	public void getResult() {
+		when().
+			get("/api/results/1").
+		then().
+			assertThat().
+			statusCode(200);
+	}
 }
