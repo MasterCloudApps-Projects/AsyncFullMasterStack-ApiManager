@@ -25,9 +25,18 @@ class ApiManagerApplicationTests {
 	@Test
 	public void getStockValue() {
 		when().
-			get("/api/TSLA").
+			get("/api/symbols/TSLA").
 		then().
 			assertThat().
 			statusCode(200);
+	}
+	
+	@Test
+	public void getStockValueNoSymbol() {
+		when().
+			get("/api/symbols/").
+		then().
+			assertThat().
+			statusCode(404);
 	}
 }

@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:    username: user
+    password: password
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/ApiManagerDB
+server:  port: 8081
+  
+rabbitmq:
+  queue-tasks: tasks
+  queue-results: results
