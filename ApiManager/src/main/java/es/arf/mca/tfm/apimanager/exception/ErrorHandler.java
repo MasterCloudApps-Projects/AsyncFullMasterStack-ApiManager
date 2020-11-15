@@ -14,4 +14,10 @@ public class ErrorHandler {
 	public ResponseEntity<?> badRequest(Exception ex) {
 		return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	@ExceptionHandler(value = TaskNotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ResponseEntity<?> taskNotFound(TaskNotFoundException tnfe) {
+		return new ResponseEntity<>(tnfe.getMessage(), HttpStatus.NOT_FOUND);
+	}
 }

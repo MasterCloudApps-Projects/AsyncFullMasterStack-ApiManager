@@ -1,0 +1,7 @@
+/.metadata/
+ApiManager/mvnw
+ApiManager/mvnw.cmd
+ApiManager/.mvn/wrapper/maven-wrapper.jar
+ApiManager/.mvn/wrapper/maven-wrapper.properties
+ApiManager/.mvn/wrapper/MavenWrapperDownloader.java
+ApiManager/.gitignore

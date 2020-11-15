@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import es.arf.mca.tfm.apimanager.dto.TaskDTO;
 import es.arf.mca.tfm.apimanager.entity.Task;
+import es.arf.mca.tfm.apimanager.exception.TaskNotFoundException;
 import es.arf.mca.tfm.apimanager.repository.TaskRepository;
 import es.arf.mca.tfm.apimanager.service.TaskService;
 import es.arf.mca.tfm.apimanager.utils.Converter;
@@ -35,6 +36,13 @@ public class TaskServiceImpl implements TaskService {
 		return convertToDTO(task);
 	}
 
+	@Override
+	public TaskDTO getResultForSymbol(String symbol, long id) throws TaskNotFoundException {
+		return this.repository.findByIdAndSymbol(id, symbol)
+				.map(t -> Converter.convertToClass(t, TaskDTO.class))	
+				.orElseThrow(() -> new TaskNotFoundException(symbol, id));
+	}
+	
 	private Task createTask(String symbol) {
 		Task task = new Task();
 		task.setSymbol(symbol);
@@ -59,4 +67,5 @@ public class TaskServiceImpl implements TaskService {
 	private TaskDTO convertToDTO(Task task) {
 		return Converter.convertToClass(task, TaskDTO.class);
 	}
+
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.arf.mca.tfm.apimanager.dto.TaskDTO;
+import es.arf.mca.tfm.apimanager.exception.TaskNotFoundException;
 import es.arf.mca.tfm.apimanager.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -24,5 +25,12 @@ public class TaskController {
 	public ResponseEntity<TaskDTO> getSymbolValue(@PathVariable String symbol) throws Exception {
 		return new ResponseEntity<>(this.service.getValueForSymbol(symbol), HttpStatus.OK);
 	}
+	
+	@Operation(summary = "Get the result of getting the value for a symbol")
+	@GetMapping("/{symbol}/results/{id}")
+	public ResponseEntity<TaskDTO> getSymbolValueResult(@PathVariable String symbol, @PathVariable long id) throws TaskNotFoundException {
+		return new ResponseEntity<>(this.service.getResultForSymbol(symbol, id), HttpStatus.OK);
+	}
+
 
 }
